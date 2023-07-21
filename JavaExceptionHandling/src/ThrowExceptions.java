@@ -1,64 +1,60 @@
 import java.util.Scanner;
+import javax.naming.InvalidNameException;
 
 public class ThrowExceptions {
 
     public static void main(String[] args) throws Exception {
 
-        System.out.print("Enter your GPA to check your eligibility for admission: ");
+        Scanner inputStudent = new Scanner(System.in);
 
-        Scanner inputGPA = new Scanner(System.in);
-        float gpa = inputGPA.nextFloat();
-        inputGPA.close();
+        System.out.print("Enter your username: ");
+        String uname = inputStudent.next();
 
-        validateGPA(gpa);
+        System.out.print("Enter your GPA: ");
+        float gpa = inputStudent.nextFloat();
+
+        inputStudent.close();
+
+//        validateStudent(uname, gpa);
+
+//        try {
+//            intermediateFunction(uname, gpa);
+//        } catch (IllegalArgumentException | InvalidNameException e) {
+//
+//            System.out.println("An exception was thrown: " + e.getClass());
+//            e.printStackTrace();
+//        }
+
+        intermediateFunction(uname, gpa);
     }
 
-    public static void validateGPA(float gpa) throws Exception {
-//    public static void validateGPA(float gpa) throws IllegalArgumentException {
+//    public static void intermediateFunction(String userId, float gpa)
+//            throws InvalidNameException, IllegalArgumentException {
+    public static void intermediateFunction(String userId, float gpa) {
+        try {
+            validateStudent(userId, gpa);
+        } catch (IllegalArgumentException | InvalidNameException e) {
 
-        if (gpa > 0 && gpa <= 4.33) {
+            System.out.println("An exception was thrown: " + e.getClass());
+            e.printStackTrace();
+        }
+    }
 
-            System.out.println("That is a valid GPA. Processing eligibility...");
+    public static void validateStudent(String userId, float gpa)
+            throws InvalidNameException, IllegalArgumentException {
+
+        if (userId.startsWith("loony_")) {
+            System.out.println("The username checks out...");
         }
         else {
-//            throw new IllegalArgumentException("Sorry. A GPA must have a value between 0 and 4.33"); // java.lang.IllegalArgumentException
-//            throw new NullPointerException("Sorry. A GPA must have a value between 0 and 4.33"); // java.lang.NullPointerException
-//            throw new RuntimeException("Sorry. A GPA must have a value between 0 and 4.33"); // java.lang.RuntimeException
-            throw new Exception("Sorry. A GPA must have a value between 0 and 4.33"); // java.lang.Exception
+            throw new InvalidNameException("The username is not in the correct format");
+        }
+
+        if (gpa > 0 && gpa <= 4.33) {
+            System.out.println("Tha is a valid GPA. Processing eligibility...");
+        }
+        else {
+            throw new IllegalArgumentException("Sorry. A GPA must have a value between 0 and 4.33.");
         }
     }
-
-//    public static void main(String[] args) {
-//
-//        System.out.print("Enter your GPA to check your eligibility for admission: ");
-//
-//        Scanner inputGPA = new Scanner(System.in);
-//        float gpa = inputGPA.nextFloat();
-//        inputGPA.close();
-//
-//        if (gpa > 0 && gpa <= 4.33) {
-//
-//            System.out.println("That is a valid GPA. Processing eligibility...");
-//        }
-//        else {
-//            throw new IllegalArgumentException("Sorry. A GPA must have a value between 0 and 4.33"); // java.lang.IllegalArgumentException
-//        }
-//    }
-
-//    public static void main(String[] args) {
-//
-//        System.out.print("Enter your GPA to check your eligibility for admission: ");
-//
-//        Scanner inputGPA = new Scanner(System.in);
-//        float gpa = inputGPA.nextFloat();
-//        inputGPA.close();
-//
-//        if (gpa > 0 && gpa <= 4.33) {
-//
-//            System.out.println("That is a valid GPA. Processing eligibility...");
-//        }
-//        else {
-//            System.out.println("Sorry. A GPA must have a value between 0 and 4.33");
-//        }
-//    }
 }
